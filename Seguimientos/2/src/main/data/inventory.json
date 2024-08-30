@@ -1,0 +1,12 @@
+[
+  {"productName": "Laptop", "price": 5800000, "amount": 10},
+  {"productName": "Smartphone", "price": 4499999, "amount": 40},
+  {"productName": "Tablet", "price": 1499999, "amount": 50},
+  {"productName": "Monitor", "price": 1249999, "amount": 30},
+  {"productName": "Teclado", "price": 199900, "amount": 100},
+  {"productName": "Mouse", "price": 79900, "amount": 150},
+  {"productName": "Impresora", "price": 499900, "amount": 25},
+  {"productName": "MemoriaUSB", "price": 39900, "amount": 500},
+  {"productName": "Cámara", "price": 2249999, "amount": 20},
+  {"productName": "Smartwatch", "price": 999900, "amount": 30}
+]
