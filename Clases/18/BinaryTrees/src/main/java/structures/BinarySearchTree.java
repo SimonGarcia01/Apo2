@@ -37,81 +37,133 @@ public class BinarySearchTree<T extends Comparable<T>>{
             //Can't delete
         } else {
             //Base case 0.1 The tree is not empty
-            delete(null, root, value);
+            try{
+                delete(null, root, value);
+            } catch(Exception e){
+                e.printStackTrace();
+            }
+
         }
     }
 
-    private void delete(Node<T> parent, Node<T> current,T value){
-        //Base case -> Finding the node
-        if(current.getValue().compareTo(value) == 0){
+    private void delete(Node<T> parent, Node<T> current,T value) throws Exception{
+        //The node exists in the tree
+        if(current != null){
+            //Base case -> Finding the node
+            if(current.getValue().compareTo(value) == 0){
 
-            //Base case 1: it's a leaf node
-            if(current.getLeft()==null & current.getRight() == null){
-                //Base Case 1.1: Its leaf node and it's the root
-                if(current == root){
-                    root = null;
-                }
-                //Base case 1.2: It's a leaf node and its to the left
-                else if(parent.getLeft() == current){
-                    parent.setLeft(null);
-                }
-                //Base case 1.3: It's a leaf node and its to the right
-                else if(parent.getRight() == current){
-                    parent.setRight(null);
-                }
-            }
-            //Base Case 2: If the node only has one left node
-            else if(current.getLeft() != null && current.getRight() == null){
-                //Base Case 2.1 = if it's the root
-                if(current == root){
-                    root = current.getLeft();
-                } else {
-                    //Base case 2.1.1 if it's a left node of the current
-                    if(parent.getLeft() == current){
-                        parent.setLeft(current.getLeft());
+                //Base case 1: it's a leaf node
+                if(current.getLeft()==null & current.getRight() == null){
+                    //Base Case 1.1: Its leaf node and it's the root
+                    if(current == root){
+                        root = null;
                     }
-                    //Base Case 2.1.2 If it's a right node of the current
-                    else{
-                        parent.setRight(current.getLeft());
+                    //Base case 1.2: It's a leaf node and its to the left
+                    else if(parent.getLeft() == current){
+                        parent.setLeft(null);
+                    }
+                    //Base case 1.3: It's a leaf node and its to the right
+                    else if(parent.getRight() == current){
+                        parent.setRight(null);
                     }
                 }
+                //Base Case 2: If the node only has one left node
+                else if(current.getLeft() != null && current.getRight() == null){
+                    //Base Case 2.1 = if it's the root
+                    if(current == root){
+                        root = current.getLeft();
+                    } else {
+                        //Base case 2.1.1 if it's a left node of the current
+                        if(parent.getLeft() == current){
+                            parent.setLeft(current.getLeft());
+                        }
+                        //Base Case 2.1.2 If it's a right node of the current
+                        else{
+                            parent.setRight(current.getLeft());
+                        }
+                    }
 
-            }
-            //Base Case 3: If the node only has a right node
-            else if(current.getLeft() == null && current.getRight() != null){
-                //Base Case 3.1 If it's the root
-                if(root == current){
-                    root = current.getRight();
-                } else {
-                    //Base Case 3.1.1 If it's a left node of the current
-                    if(parent.getLeft() == current){
-                        parent.setLeft(current.getRight());
-                    }
-                    //Base Case 3.1.2 If it's a right node of the current
-                    else{
-                        parent.setRight(current.getRight());
+                }
+                //Base Case 3: If the node only has a right node
+                else if(current.getLeft() == null && current.getRight() != null){
+                    //Base Case 3.1 If it's the root
+                    if(root == current){
+                        root = current.getRight();
+                    } else {
+                        //Base Case 3.1.1 If it's a left node of the current
+                        if(parent.getLeft() == current){
+                            parent.setLeft(current.getRight());
+                        }
+                        //Base Case 3.1.2 If it's a right node of the current
+                        else{
+                            parent.setRight(current.getRight());
+                        }
                     }
                 }
+                //Base Case 4: The node has both children nodes
+                else if(current.getLeft() != null && current.getRight() != null){
+                    //This process can be done with the successor
+                    Node<T> predecessor = getMax(current.getLeft());
+                    current.setValue(predecessor.getValue());
+                    delete(current, current.getLeft(), predecessor.getValue());
+                }
             }
-            //Base Case 4: The node has both children nodes
-            else if(current.getLeft() != null && current.getRight() != null){
-                //This process can be done with the successor
-                Node<T> predecessor = getMax(current.getLeft());
-                current.setValue(predecessor.getValue());
-                delete(current, current.getLeft(), predecessor.getValue());
+
+            //Recursive cases
+            //Look to the left
+            else if(current.getValue().compareTo(value) > 0){
+                delete(current, current.getLeft(), value);
             }
+
+            //Look to the right
+            else if(current.getValue().compareTo(value) < 0){
+                delete(current, current.getRight(), value);
+            }
+        } else {
+            //Throw exception saying the node doesn't exist
+            throw new Exception("Node hasn't been found");
+            //Don't use general exception, its bad practice
         }
 
-        //Recursive cases
-        //Look to the left
-        else if(current.getValue().compareTo(value) > 0){
-            delete(current, current.getLeft(), value);
+
+    }
+
+    public Node<T> search(T value){
+        Node<T> found = null;
+
+        //BASE CASE 1: The searched node is the root
+        if(root.getValue().compareTo(value)==0){
+            found = root;
+        }
+        //Call recursive method
+        else{
+            found = search(root, value);
+        }
+        return found;
+    }
+
+    private Node<T> search(Node<T> current, T value){
+        Node<T> found = null;
+        //Check if it's inside the tree
+        if(current != null){
+
+            //Base case: The node is found
+            if(current.getValue().compareTo(value) == 0){
+               found = current;
+            }
+            //Recursive case: Look to the left
+            else if(current.getValue().compareTo(value) > 0){
+                found = search(current.getLeft(),value);
+            }
+            //Recursive case: Look to the right
+            else if(current.getValue().compareTo(value) < 0){
+                found = search(current.getRight(),value);
+            }
+        } else {
+            //It's not inside the tree
         }
 
-        //Look to the right
-        else if(current.getValue().compareTo(value) < 0){
-            delete(current, current.getRight(), value);
-        }
+        return found;
     }
 
     public Node<T> getMax(){
