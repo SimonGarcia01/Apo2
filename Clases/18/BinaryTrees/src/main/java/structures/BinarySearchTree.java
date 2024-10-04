@@ -32,9 +32,11 @@ public class BinarySearchTree<T extends Comparable<T>>{
     }
 
     public void delete(T value){
+        //Base Case 0: The tree is empty
         if(root == null) {
             //Can't delete
         } else {
+            //Base case 0.1 The tree is not empty
             delete(null, root, value);
         }
     }
@@ -45,7 +47,7 @@ public class BinarySearchTree<T extends Comparable<T>>{
 
             //Base case 1: it's a leaf node
             if(current.getLeft()==null & current.getRight() == null){
-                //Base Case 1.1: Its leaf noda an is the root
+                //Base Case 1.1: Its leaf node and it's the root
                 if(current == root){
                     root = null;
                 }
@@ -61,12 +63,12 @@ public class BinarySearchTree<T extends Comparable<T>>{
             //Base Case 2: If the node only has one left node
             else if(current.getLeft() != null && current.getRight() == null){
                 //Base Case 2.1 = if it's the root
-                if(root == current){
+                if(current == root){
                     root = current.getLeft();
                 } else {
                     //Base case 2.1.1 if it's a left node of the current
                     if(parent.getLeft() == current){
-                        parent.setLeft(current.getRight());
+                        parent.setLeft(current.getLeft());
                     }
                     //Base Case 2.1.2 If it's a right node of the current
                     else{
@@ -93,10 +95,10 @@ public class BinarySearchTree<T extends Comparable<T>>{
             }
             //Base Case 4: The node has both children nodes
             else if(current.getLeft() != null && current.getRight() != null){
-                //This process can be done with the predecessor
-                Node<T> successor = getMax(current.getLeft());
-                current.setValue(successor.getValue());
-                delete(current, current.getLeft(), successor.getValue());
+                //This process can be done with the successor
+                Node<T> predecessor = getMax(current.getLeft());
+                current.setValue(predecessor.getValue());
+                delete(current, current.getLeft(), predecessor.getValue());
             }
         }
 
