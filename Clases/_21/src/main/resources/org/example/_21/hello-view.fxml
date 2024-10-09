@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+
+<!-- Horizontal Box Principal-->
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="org.example._21.control.HelloController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+  </padding>
+
+  <!-- Primer vertical Box-->
+  <HBox>
+    <Label fx:id="nameLabel" text = "Nombre: "/>
+    <TextField fx:id="nameTextField"/>
+  </HBox>
+
+  <!-- Segundo vertical Box-->
+  <HBox>
+    <Label fx:id="codeLabel" text = "Código: "/>
+    <TextField fx:id="codeTextField"/>
+  </HBox>
+  <Label fx:id="welcomeText"/>
+  <Button text = "Registrar" onAction="#onRegisterUser"/>
+</VBox>
