@@ -93,4 +93,7 @@ public class Avatar {
         }
     }
 
+    public Position getPosition() {
+        return position;
+    }
 }
