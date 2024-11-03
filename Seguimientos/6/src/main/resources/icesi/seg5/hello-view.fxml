@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefWidth="362.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="icesi.seg5.controller.HelloController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+
+  <TableView fx:id="dataTableView">
+    <columns>
+      <TableColumn fx:id="nameTC" text="Name" />
+      <TableColumn fx:id="typeTC" text="Type" />
+      <TableColumn fx:id="lengthTC" text="Duration" />
+      <TableColumn fx:id="caloriesTC" text="Calories" />
+    </columns>
+  </TableView>
+  <Button fx:id="exerciseButton" onAction="#onHelloButtonClick" text="Add Exercise" textFill="#dd0fe1" />
+   <Button fx:id="deleteExerciseButton" onAction="#onDeleteButton" mnemonicParsing="false" text="Delete Exercise" textFill="RED" />
+   <Button fx:id="statisticButton" mnemonicParsing="false" onAction="#onStatisticsButton" text="Statistics" textFill="#0c00fa" />
+</VBox>
