@@ -28,7 +28,12 @@ public class Position {
     public void normalize(){
 
         double normal = Math.sqrt(Math.pow(x, 2) + Math.pow(y,2));
-        x = x/normal;
-        y = y/normal;
+        x /= normal;
+        y /= normal;
+    }
+
+    public void speed(int speed){
+        x *= speed;
+        y *= speed;
     }
 }

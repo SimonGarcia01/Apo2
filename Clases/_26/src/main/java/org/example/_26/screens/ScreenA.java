@@ -39,19 +39,22 @@ public class ScreenA extends BaseScreen{
 
         double distance = iDistance.distance(avatar.getPosition(), box1.getPosition());
 
-        if(distance < 40 && !box1.isAlive()){
-//            box1.start();
-            //Tried method to get box close to player
-            box1.getPosition().setX(avatar.getPosition().getX());
-            box1.getPosition().setY(avatar.getPosition().getY());
+        if(distance < 200){
 
-            Position diff = new Position(
-                    avatar.getPosition().getX() - box1.getPosition().getX(),
-                    avatar.getPosition().getY() - box1.getPosition().getY()
-            );
+            //Calculate difference with the position of both entities
+            double posX = avatar.getPosition().getX() - box1.getPosition().getX();
+            double posY = avatar.getPosition().getY() - box1.getPosition().getY();
 
+            //Define difference vector
+            Position diff = new Position(posX, posY);
+
+            //Normalize to change speed to 1
             diff.normalize();
-            box1.setPosition(diff);
+
+            diff.speed(4);
+
+            box1.getPosition().setX(box1.getPosition().getX() + diff.getX());
+            box1.getPosition().setY(box1.getPosition().getY() + diff.getY());
         }
 
         if(avatar.getPosition().getX() < 0){
