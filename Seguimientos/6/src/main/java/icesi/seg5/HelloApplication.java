@@ -1,8 +1,6 @@
 package icesi.seg5;
 
-import icesi.seg5.controller.HelloController;
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,21 +23,10 @@ public class HelloApplication extends Application {
             stage.setTitle("Hello!");
             stage.setScene(scene);
             stage.show();
-
-            Object controller = fxmlLoader.getController();
-
-            stage.setOnCloseRequest(event -> {
-                if (controller instanceof HelloController) {
-                    ((HelloController) controller).save();
-                }
-                Platform.exit();
-            });
-
-            stage.show();
-
         } catch(IOException e){
             e.printStackTrace();
         }
+
 
     }
 

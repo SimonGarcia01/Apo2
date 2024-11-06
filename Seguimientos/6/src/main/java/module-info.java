@@ -2,7 +2,6 @@ module icesi.seg5 {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.google.gson;
-    requires java.compiler;
 
 
     opens icesi.seg5 to javafx.fxml;

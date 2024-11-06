@@ -9,9 +9,6 @@ import javafx.collections.ObservableList;
 import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MemberController {
     private static MemberController instance;
@@ -27,50 +24,6 @@ public class MemberController {
 
     public void updateMembers(){
         members.addAll(memberList);
-    }
-
-    public String averageDuration(){
-
-        double sum = 0.0;
-
-        for(Member member : memberList){
-            sum += member.getLength();
-        }
-
-        return String.format("%.2f min", sum/memberList.size());
-    }
-
-    public String[] getTop3Activities() {
-
-        Map<String, Integer> activityCount = new HashMap<>();
-        for (Member member : memberList) {
-            String type = member.getType();
-            activityCount.put(type, activityCount.getOrDefault(type, 0) + 1);
-        }
-
-        List<Map.Entry<String, Integer>> sortedActivities = new ArrayList<>(activityCount.entrySet());
-        sortedActivities.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
-
-        String[] top3Activities = new String[3];
-        for (int i = 0; i < 3 && i < sortedActivities.size(); i++) {
-            top3Activities[i] = sortedActivities.get(i).getKey();
-        }
-
-        return top3Activities;
-    }
-
-    public ArrayList<String> deleteActivity(String type) {
-        ArrayList<String> deletedMembers = new ArrayList<>();
-
-        for (int i = memberList.size() - 1; i >= 0; i--) {
-            Member member = memberList.get(i);
-            if (member.getType().equals(type)) {
-                deletedMembers.add("\n" + member.toString());
-                memberList.remove(i);
-            }
-        }
-
-        return deletedMembers;
     }
 
     public MemberController(){

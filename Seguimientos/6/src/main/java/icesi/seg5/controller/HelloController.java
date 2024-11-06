@@ -9,11 +9,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.annotation.processing.Generated;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
+    @FXML
+    private Label welcomeText;
 
     @FXML
     private TableView<Member> dataTableView;
@@ -37,16 +38,6 @@ public class HelloController implements Initializable {
         HelloApplication.openWindow("form-exercise.fxml");
     }
 
-    @FXML
-    protected void onStatisticsButton() {
-        HelloApplication.openWindow("statistics.fxml");
-    }
-
-    @FXML
-    protected void onDeleteButton() {
-        HelloApplication.openWindow("delete.fxml");
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameTC.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -55,10 +46,13 @@ public class HelloController implements Initializable {
         caloriesTC.setCellValueFactory(new PropertyValueFactory<>("calories"));
 
         dataTableView.setItems(MemberController.getInstance().getMemberList());
+
     }
 
     public void save(){
-        MemberController.getInstance().save();
+        memberController.createMember("Adriana Suarez","Salto con lazo",30,200);
+        memberController.save();
     }
+
 
 }
